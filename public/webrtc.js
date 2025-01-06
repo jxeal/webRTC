@@ -75,10 +75,8 @@ const pc = new RTCPeerConnection({
     pc.onicecandidate = (e) => {
       SDPstring = JSON.stringify(pc.localDescription);
       offerSDP = pc.localDescription; 
-      navigator.clipboard.writeText(SDPstring);
       roomCode = document.getElementById('roomCode').value;
       socket.emit("send-offer-sdp", { room: roomCode, offerSDP });
-      console.log("Sending Offer SDP:");
     };
   
     pc.createOffer()
@@ -109,10 +107,8 @@ const pc = new RTCPeerConnection({
     pc.onicecandidate = (e) => {
       SDPstring = JSON.stringify(pc.localDescription);
       answerSDP = pc.localDescription;
-      navigator.clipboard.writeText(SDPstring);
       roomCode = document.getElementById('roomCode').value;
       socket.emit("send-answer-sdp", { room: roomCode, answerSDP });
-      console.log("Sending Answer SDP:");
     };
     pc.setRemoteDescription(offer).then((e) => console.log("Offer set!"));
     pc.createAnswer()
