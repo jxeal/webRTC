@@ -25,7 +25,7 @@ body {
 }
 
 /* .video-row video {
-    margin: 0 10px; space between videos
+  margin: 0 10px; space between videos
 } */
 
 .button {
@@ -39,9 +39,14 @@ body {
   align-items: center;
 }
 
+.input-row button {
+  margin-left: 5px;  
+  margin-right: 5px; /* space between input and button */
+  /* padding: 5px; */
+}
 .input-row input {
-  margin-left: 10px;
-  margin-right: 10px; /* space between input and button */
+  margin-left: 5px;  
+  margin-right: 5px; /* space between input and button */
   padding: 10px;
 }
 
@@ -67,7 +72,7 @@ body {
 }
 
 .toast.success {
-  background-color: #4caf50;
+  background-color: #4CAF50;
 }
 
 .toast.error {

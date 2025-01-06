@@ -3,7 +3,7 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
-app.use(express.static("mainpage"));
+app.use(express.static("public"));
 
 // Store for active rooms with their creation timestamps
 const activeRooms = new Map();
@@ -74,13 +74,13 @@ io.on("connection", (socket) => {
   socket.on("send-offer-sdp", ({ room, offerSDP }) => {
     // Emit the offerSDP to all members in the specified room
     socket.to(room).emit("receive-offer-sdp", offerSDP);
-    console.log(`Offer SDP sent to room ${room}:`, offerSDP);
+    console.log(`Offer SDP sent to room ${room}:`);
   });
 
   socket.on("send-answer-sdp", ({ room, answerSDP }) => {
     // Emit the answerSDP to all members in the specified room
     socket.to(room).emit("receive-answer-sdp", answerSDP);
-    console.log(`answer SDP sent to room ${room}:`, answerSDP);
+    console.log(`answer SDP sent to room ${room}:`);
   });
 
   socket.on("disconnect", () => {

@@ -24,18 +24,6 @@
           <video width="512" height="384" id="remoteVideo" autoplay></video>
         </div>
       </div>
-      <button class="button" id="Camera">Camera On/Off</button>
-      <!-- Make this optional. So make this either a create offer/ join button based on whether the input field is empty -->
-      <div class="input-row">
-        <input type="text" placeholder="Answer" id="answer" />
-        <button class="button" onclick="handleOfferClick()">
-          Create Offer
-        </button>
-      </div>
-      <div class="input-row">
-        <input type="text" placeholder="Offer" id="join" />
-        <button class="button" onclick="handleJoin()">Join</button>
-      </div>
       <div class="input-row">
         <button class="button" id="generateRoom">Generate Room</button>
         <br /><br />
@@ -43,8 +31,16 @@
         <button class="button" id="joinRoom">Join Room</button>
         <p id="currentRoom"></p>
       </div>
+      <div class="input-row">
+        <button class="button" id="Camera">Camera On/Off</button>
+        <button class="button" id="offerButton" ">
+          Start VC
+        </button>
+      </div>
       <div id="toast" class="toast"></div>
+      <p>Join a room. Turn the camera on and start vc.  </p>
     </div>
+    
     <script type="module" src="webrtc.js"></script>
     <script type="module" src="client.js"></script>
     <script type="module" src="signal.js"></script>
