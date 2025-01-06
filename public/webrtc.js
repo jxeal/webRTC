@@ -17,7 +17,7 @@ const pc = new RTCPeerConnection({
   
   document
     .getElementById("offerButton")
-    .addEventListener("click", handleOfferClick);
+    .addEventListener("click", handleCreate);
   
   let videoCameraFlag = 0;
   async function startCamera() {
@@ -65,18 +65,6 @@ const pc = new RTCPeerConnection({
   function handleCameraClick() {
     if (!videoCameraFlag) startCamera(); //Start the camera
     else toggleVideoFromCamera(); //Toggle the Camera on/off
-  }
-  
-  //Flag for create offer and handle the create offer button click
-  let offerFlag = 0;
-  function handleOfferClick() {
-    if (!offerFlag) {
-      handleCreate();
-      offerFlag = 1;
-    } else {
-      handleAnswer();
-      offerFlag = 0;
-    }
   }
   
   let roomCode; 
