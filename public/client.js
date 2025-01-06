@@ -45,13 +45,11 @@ function showToast(message, type = 'success') {
 socket.on('room-created', (code) => {
     showToast(`Room created successfully`);
     document.getElementById('roomCode').value = code;
-    document.getElementById('currentRoom').textContent = 'Current Room: ' + code;
     console.log('Room created:', code);
 });
 
 socket.on('room-joined', (code) => {
     showToast(`Joined room successfully`);
-    document.getElementById('currentRoom').textContent = 'Current Room: ' + code;
     console.log('Room joined:', code);
     // sendOfferSDP(code);
 });
@@ -59,7 +57,7 @@ socket.on('room-joined', (code) => {
 socket.on('join-error', (message) => {
     showToast(message, 'error');
     currentRoom = null;
-    document.getElementById('currentRoom').textContent = '';
+    document.getElementById('roomCode').value = "";
 });
 
 // Error handling for socket
