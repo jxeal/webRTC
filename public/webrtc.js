@@ -10,6 +10,7 @@ const pc = new RTCPeerConnection({
   
   let localStream = null;
   let remoteStream = null;
+  let roomCode; 
   
   document
     .getElementById("Camera")
@@ -67,8 +68,6 @@ const pc = new RTCPeerConnection({
     else toggleVideoFromCamera(); //Toggle the Camera on/off
   }
   
-  let roomCode; 
-  
   function handleCreate() {
     let SDPstring, offerSDP;
   
@@ -80,12 +79,12 @@ const pc = new RTCPeerConnection({
     };
   
     pc.createOffer()
-      .then((e) => pc.setLocalDescription(e))
-      .then((e) => console.log("Offer Set successfully!"));
+      .then((e) => pc.setLocalDescription(e));
+      // .then((e) => console.log("Offer Set successfully!"));
   }
   
   socket.on("receive-answer-sdp", (answerSDP) => {
-    console.log("Received answer SDP:");
+    // console.log("Received answer SDP:");
     handleAnswer(answerSDP);
   });
   
@@ -95,10 +94,10 @@ const pc = new RTCPeerConnection({
   }
   
   socket.on("receive-offer-sdp", (offerSDP) => {
-    console.log("Received Offer SDP:");
+    // console.log("Received Offer SDP:");
     handleJoin(offerSDP);
     roomCode = document.getElementById('roomCode').value;
-    sendAnswerSDP(roomCode, answerSDP);
+    // sendAnswerSDP(roomCode, answerSDP);
   });
   
   // Accept offer SDP and send answer SDP
@@ -112,6 +111,6 @@ const pc = new RTCPeerConnection({
     };
     pc.setRemoteDescription(offer).then((e) => console.log("Offer set!"));
     pc.createAnswer()
-      .then((a) => pc.setLocalDescription(a))
-      .then((a) => console.log("Answer Created"));
+      .then((a) => pc.setLocalDescription(a));
+      // .then((a) => console.log("Answer Created"));
   }

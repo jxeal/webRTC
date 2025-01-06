@@ -69,19 +69,19 @@ io.on("connection", (socket) => {
     const room = io.sockets.adapter.rooms.get(code);
     const numMembers = room ? room.size : 0;
     socket.emit("room-members-count", { room: code, count: numMembers });
-    console.log(`Room ${code} has ${numMembers} members`);
+    // console.log(`Room ${code} has ${numMembers} members`);
   });
 
   socket.on("send-offer-sdp", ({ room, offerSDP }) => {
     // Emit the offerSDP to all members in the specified room
     socket.to(room).emit("receive-offer-sdp", offerSDP);
-    console.log(`Offer SDP sent to room ${room}:`);
+    // console.log(`Offer SDP sent to room ${room}:`);
   });
 
   socket.on("send-answer-sdp", ({ room, answerSDP }) => {
     // Emit the answerSDP to all members in the specified room
     socket.to(room).emit("receive-answer-sdp", answerSDP);
-    console.log(`answer SDP sent to room ${room}:`);
+    // console.log(`answer SDP sent to room ${room}:`);
   });
 
   socket.on("disconnect", () => {
