@@ -78,21 +78,43 @@ function handleOfferClick() {
 //Create offer 
 let offerSDParray=[]
 
-async function handleCreate() {
+export async function handleCreate() {
     let SDPstring;
-    pc.onicecandidate = e => {
+  
+    // Create a Promise that resolves when we get an ICE candidate
+    const icePromise = new Promise((resolve) => {
+      pc.onicecandidate = (e) => {
+        // This means ICE gathering is complete
         SDPstring = JSON.stringify(pc.localDescription);
-        offerSDParray.push(SDPstring);
-        console.log("Ice candidate found! Reprinting SDP " + SDPstring);
-        navigator.clipboard.writeText(SDPstring);
-    }
+        resolve(SDPstring);
+      };
+    });
+  
+    // Create and set the offer
+    pc.createOffer().then((offer) => pc.setLocalDescription(offer));
+  
+    // Wait for ICE gathering to complete
+    const finalSDP = await icePromise;
+    // Now you can send this via WebSocket
+    // websocket.send(finalSDP);
+    return finalSDP;
+  }
+
+// async function handleCreate() {
+//     let SDPstring;
+//     pc.onicecandidate = e => {
+//         SDPstring = JSON.stringify(pc.localDescription);
+//         offerSDParray.push(SDPstring);
+//         console.log("Ice candidate found! Reprinting SDP " + SDPstring);
+//         navigator.clipboard.writeText(SDPstring);
+//     }
     
-    pc.createOffer().then(e => pc.setLocalDescription(e)).then(e =>
-        console.log("Offer Set successfully!"));
-        // const e= await pc.createOffer();
-        // const localDesc = await pc.setLocalDescription(e);
+//     pc.createOffer().then(e => pc.setLocalDescription(e)).then(e =>
+//         console.log("Offer Set successfully!"));
+//         // const e= await pc.createOffer();
+//         // const localDesc = await pc.setLocalDescription(e);
      
-}
+// }
 
 // Accept the answer SDP from peer 2
 
@@ -114,10 +136,7 @@ function handleJoin(offer) {
     }
     pc.setRemoteDescription(offer).then(e => console.log("Offer set!"))
     pc.createAnswer().then(a => pc.setLocalDescription(a)).then(a => console.log("Answer Created"));
-    // return SDPstring;
-    setTimeout(()=>{
-        return SDPstring;
-    },1000)
+    return SDPstring;
 }
 
-export { handleCreate, handleAnswer, handleJoin, offerSDParray };
+export { handleAnswer, handleJoin, offerSDParray };

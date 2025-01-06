@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Video Calling App</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="video-row">
-            <div class="video-wrapper">
-                <video width="512" height="384" id="localVideo" autoplay muted>
-                </video>
-            </div>
-            
-            <div class="video-wrapper">
-                <video width="512" height="384" 
-                id="remoteVideo" autoplay>
-            </video>
+      <div class="video-row">
+        <div class="video-wrapper">
+          <video
+            width="512"
+            height="384"
+            id="localVideo"
+            autoplay
+            muted
+          ></video>
         </div>
+
+        <div class="video-wrapper">
+          <video width="512" height="384" id="remoteVideo" autoplay></video>
         </div>
-        <button class="button" id="Camera" >Camera On/Off</button>
-        <!-- Make this optional. So make this either a create offer/ join button based on whether the input field is empty -->
-        <div class="input-row">
-            <input type="text" placeholder="Answer" id="answer" >
-            <button class="button" onclick="handleOfferClick()" >Create Offer</button>
-        </div>
-        <div class="input-row">
-            <input type="text" placeholder="Offer" id="join" >
-            <button class="button" onclick="handleJoin()">Join</button>
-        </div>
-        <div class="input-row">
-            <button class="button" id="generateRoom">Generate Room</button>
-            <br><br>
-            <input type="text" id="roomCode" placeholder="Enter 4-digit code">
-            <button class="button" id="joinRoom">Join Room</button>
-            <p id="currentRoom"></p>
-        </div>
-        <div id="toast" class="toast"></div>
+      </div>
+      <button class="button" id="Camera">Camera On/Off</button>
+      <!-- Make this optional. So make this either a create offer/ join button based on whether the input field is empty -->
+      <div class="input-row">
+        <input type="text" placeholder="Answer" id="answer" />
+        <button class="button" onclick="handleOfferClick()">
+          Create Offer
+        </button>
+      </div>
+      <div class="input-row">
+        <input type="text" placeholder="Offer" id="join" />
+        <button class="button" onclick="handleJoin()">Join</button>
+      </div>
+      <div class="input-row">
+        <button class="button" id="generateRoom">Generate Room</button>
+        <br /><br />
+        <input type="text" id="roomCode" placeholder="Enter 4-digit code" />
+        <button class="button" id="joinRoom">Join Room</button>
+        <p id="currentRoom"></p>
+      </div>
+      <div id="toast" class="toast"></div>
     </div>
     <script type="module" src="webrtc.js"></script>
     <script type="module" src="client.js"></script>
     <script type="module" src="signal.js"></script>
-</body>
+  </body>
 </html>
