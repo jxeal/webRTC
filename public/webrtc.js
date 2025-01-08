@@ -15,6 +15,10 @@ const pc = new RTCPeerConnection({
   document
     .getElementById("Camera")
     .addEventListener("click", handleCameraClick);
+
+  document
+    .getElementById("Audio")
+    .addEventListener("click", handleAudio);
   
   document
     .getElementById("offerButton")
@@ -66,6 +70,13 @@ const pc = new RTCPeerConnection({
   function handleCameraClick() {
     if (!videoCameraFlag) startCamera(); //Start the camera
     else toggleVideoFromCamera(); //Toggle the Camera on/off
+  }
+
+  function handleAudio(){
+    const audioTracks = localStream.getAudioTracks();
+    if (audioTracks.length > 0) {
+      audioTracks[0].enabled = !audioTracks[0].enabled; // Disable the track instead of stopping it
+    }
   }
   
   function handleCreate() {
