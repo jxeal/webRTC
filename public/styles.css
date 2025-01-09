@@ -15,58 +15,47 @@ body {
 .container {
   text-align: center;
   padding: 20px;
-  width: 100%;
-  max-width: 900px; /* Ensure the container doesn't get too wide */
 }
 
 .video-row {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  margin-bottom: 20px; /* space between rows */
+  /* margin: 0 30px; */
 }
 
-.video-wrapper {
-  width: 512px;
-  height: 384px;
-  background-color: black;
-  overflow: hidden;
-  margin: 0 10px;
-}
-
-/* Adjust video size for smaller screens */
-@media screen and (max-width: 1024px) {
-  .video-wrapper {
-    width: 100%;
-    height: auto; /* Allow height to adjust based on width */
-  }
-}
+/* .video-row video {
+  margin: 0 10px; space between videos
+} */
 
 .button {
-  margin: 10px 0;
+  margin: 10px 0; /* space between button and input */
   padding: 10px 20px;
-  font-size: 16px; /* Larger text on mobile for easier interaction */
 }
 
 .input-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .input-row button {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 5px;  
+  margin-right: 5px; /* space between input and button */
+  /* padding: 5px; */
+}
+.input-row input {
+  margin-left: 5px;  
+  margin-right: 5px; /* space between input and button */
+  padding: 10px;
 }
 
-.input-row input {
-  margin-left: 5px;
-  margin-right: 5px;
-  padding: 10px;
-  font-size: 16px; /* Larger input text for easier typing */
-  width: 100%;
-  max-width: 300px; /* Limit input width */
+.video-wrapper {
+  width: 512px; /* Match the video width */
+  height: 384px; /* Match the video height */
+  background-color: black; /* Set background color */
+  overflow: hidden; /* Hide overflow in case video goes beyond bounds */
+  margin: 0 10px;
 }
 
 .toast {
@@ -94,13 +83,10 @@ body {
   visibility: visible;
   opacity: 1;
 }
+/* Existing styles remain unchanged */
 
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
-  body {
-    flex-direction: column;
-  }
-
   .video-row {
     flex-direction: column; /* Stack videos vertically on smaller screens */
   }
@@ -109,15 +95,5 @@ body {
     width: 100%; /* Make videos take full width */
     height: auto; /* Maintain aspect ratio */
     margin: 10px 0; /* Vertical margin between videos */
-  }
-
-  .input-row {
-    flex-direction: column; /* Stack input and buttons vertically */
-    width: 100%;
-  }
-
-  .input-row input, .input-row button {
-    width: 100%; /* Ensure buttons and input fill available space */
-    margin: 10px 0; /* Add space between inputs/buttons */
   }
 }
