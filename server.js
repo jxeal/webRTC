@@ -84,6 +84,10 @@ io.on("connection", (socket) => {
     // console.log(`answer SDP sent to room ${room}:`);
   });
 
+  socket.on("stop-vc", (room)=>{
+    socket.to(room).emit("vc-stopped", "Peer stopped VC");
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });

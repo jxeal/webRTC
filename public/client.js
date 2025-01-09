@@ -35,7 +35,6 @@ function showToast(message, type = 'success') {
     toast.textContent = message;
     toast.className = `toast ${type} show`;
     
-    // Hide after 2.5 seconds
     setTimeout(() => {
         toast.className = 'toast';
     }, 2500);
@@ -66,4 +65,4 @@ socket.on('connect_error', (error) => {
     showToast('Connection error!', 'error');
 });
 
-export {currentRoom};
+// export {currentRoom};

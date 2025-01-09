@@ -21,6 +21,9 @@ document
 .getElementById("Stop")
 .addEventListener("click", handleStopVC);
 
+const videoElementLocal = document.querySelector("video#localVideo");
+const videoElementRemote = document.querySelector("video#remoteVideo");
+
 let videoCameraFlag = 0;
 async function startCamera() {
   try {
@@ -43,8 +46,6 @@ async function startCamera() {
       };
       localStream = await navigator.mediaDevices.getUserMedia(constraints);
       remoteStream = new MediaStream();
-      const videoElementLocal = document.querySelector("video#localVideo");
-      const videoElementRemote = document.querySelector("video#remoteVideo");
       videoElementLocal.srcObject = localStream;
       videoElementRemote.srcObject = remoteStream;
       videoElementLocal.controls = false;
@@ -151,7 +152,27 @@ async function startCamera() {
     //   callFlag = 1;    
   }
 
-  function handleStopVC() {
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    
+    setTimeout(() => {
+        toast.className = 'toast';
+    }, 2500);
+  }
+
+  socket.on("vc-stopped", (message)=>{
+    handleRemoveTracks();
+    showToast(message, 'error');
+  })
+
+  function handleStopVC(){
+    socket.emit("stop-vc", roomCode);
+    handleRemoveTracks();
+  }
+
+  function handleRemoveTracks() {
     // Stop local media tracks
     if (localStream) {
       localStream.getTracks().forEach((track) => {
@@ -163,10 +184,8 @@ async function startCamera() {
     if (pc) {
       pc.close();
     }
-  
+    roomCode = document.getElementById('roomCode').value;
     // Clear the video elements
-    const videoElementLocal = document.querySelector("video#localVideo");
-    const videoElementRemote = document.querySelector("video#remoteVideo");
     videoElementLocal.srcObject = null;
     videoElementRemote.srcObject = null;
   
