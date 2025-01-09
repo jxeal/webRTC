@@ -1,32 +1,37 @@
-const pc = new RTCPeerConnection({
-    iceServers: [
-      { urls: "stun:stun.l.google.com:19302" }, // Google STUN server
-      { urls: "stun:stun1.l.google.com:19302" }, // Another Google STUN server
-      { urls: "stun:stun2.l.google.com:19302" }, // Another Google STUN server
-      { urls: "stun:stun3.l.google.com:19302" }, // Another Google STUN server
-    ],
-  });
-  export const socket = io();
-  
-  let localStream = null;
-  let remoteStream = null;
-  let roomCode; 
-  
-  document
-    .getElementById("Camera")
-    .addEventListener("click", handleCameraClick);
+export const socket = io();
+let pc = null;
 
-  document
-    .getElementById("Audio")
-    .addEventListener("click", handleAudio);
-  
-  document
-    .getElementById("offerButton")
-    .addEventListener("click", handleCreate);
-  
-  let videoCameraFlag = 0;
-  async function startCamera() {
-    try {
+let localStream = null;
+let remoteStream = null;
+let roomCode; 
+
+document
+.getElementById("Camera")
+.addEventListener("click", handleCameraClick);
+
+document
+.getElementById("Audio")
+.addEventListener("click", handleAudio);
+
+document
+.getElementById("Start")
+.addEventListener("click", handleCreate);
+
+document
+.getElementById("Stop")
+.addEventListener("click", handleStopVC);
+
+let videoCameraFlag = 0;
+async function startCamera() {
+  try {
+      pc = new RTCPeerConnection({
+          iceServers: [
+            { urls: "stun:stun.l.google.com:19302" }, // Google STUN server
+            { urls: "stun:stun1.l.google.com:19302" }, // Another Google STUN server
+            { urls: "stun:stun2.l.google.com:19302" }, // Another Google STUN server
+            { urls: "stun:stun3.l.google.com:19302" }, // Another Google STUN server
+          ],
+        });
       const constraints = {
         video:
           // true,
@@ -78,6 +83,18 @@ const pc = new RTCPeerConnection({
       audioTracks[0].enabled = !audioTracks[0].enabled; // Disable the track instead of stopping it
     }
   }
+
+//Not working. Idk why. F Me
+  let callFlag = 0;
+  function StartorStop(){
+    if (!callFlag) {
+      handleCreate(); 
+      // console.log("Calling create function");
+    } else{
+      handleStopVC();
+      // console.log("Calling stop function");
+    }
+  }
   
   function handleCreate() {
     let SDPstring, offerSDP;
@@ -102,6 +119,10 @@ const pc = new RTCPeerConnection({
   // Accept the answer SDP from peer 2
   function handleAnswer(answer) {
     pc.setRemoteDescription(answer);
+    // document
+    //     .getElementById("StartStop")
+    //     .innerText = "Stop VC";
+    //     callFlag = 1;
   }
   
   socket.on("receive-offer-sdp", (offerSDP) => {
@@ -124,4 +145,32 @@ const pc = new RTCPeerConnection({
     pc.createAnswer()
       .then((a) => pc.setLocalDescription(a));
       // .then((a) => console.log("Answer Created"));
+    // document
+    //   .getElementById("StartStop")
+    //   .innerText = "Stop VC";
+    //   callFlag = 1;    
+  }
+
+  function handleStopVC() {
+    // Stop local media tracks
+    if (localStream) {
+      localStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+  
+    // Close the RTCPeerConnection
+    if (pc) {
+      pc.close();
+    }
+  
+    // Clear the video elements
+    const videoElementLocal = document.querySelector("video#localVideo");
+    const videoElementRemote = document.querySelector("video#remoteVideo");
+    videoElementLocal.srcObject = null;
+    videoElementRemote.srcObject = null;
+  
+    // Reset flag
+    videoCameraFlag = 0;
+    callFlag = 0;
   }
