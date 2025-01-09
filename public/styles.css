@@ -10,6 +10,7 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #f0f0f0;
+  margin: 0;
 }
 
 .container {
@@ -83,10 +84,18 @@ body {
   visibility: visible;
   opacity: 1;
 }
-/* Existing styles remain unchanged */
 
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
+  body {
+    justify-content: flex-start; /* Align body content to the left on smaller screens */
+  }
+
+  .container {
+    width: 100%;
+    padding: 10px; /* Adjust padding on mobile */
+  }
+
   .video-row {
     flex-direction: column; /* Stack videos vertically on smaller screens */
   }
