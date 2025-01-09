@@ -9,29 +9,37 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0;
   margin: 0;
+  color: #e0e0e0;
+  background-color: #121212;
 }
 
 .container {
   text-align: center;
   padding: 20px;
+  width: 100%;
+  max-width: 1024px;
 }
 
 .video-row {
   display: flex;
   justify-content: center;
   margin-bottom: 20px; /* space between rows */
-  /* margin: 0 30px; */
 }
 
-/* .video-row video {
-  margin: 0 10px; space between videos
-} */
-
-.button {
+button {
+  background-color: #555555; /* Accent color for buttons */
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
   margin: 10px 0; /* space between button and input */
   padding: 10px 20px;
+}
+
+button:hover {
+  background-color: #666666; /* Slightly darker shade on hover */
 }
 
 .input-row {
@@ -46,15 +54,22 @@ body {
   /* padding: 5px; */
 }
 .input-row input {
-  margin-left: 5px;  
-  margin-right: 5px; /* space between input and button */
+  /* margin-left: 5px;  
+  margin-right: 5px; space between input and button */
+  padding: 12px 20px; 
+  font-size: 18px; 
+  width: 245px; 
+  /* width: 75%; */
   padding: 10px;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .video-wrapper {
   width: 512px; /* Match the video width */
   height: 384px; /* Match the video height */
-  background-color: black; /* Set background color */
+  background-color: #2c2c2c; /* Set background color */
   overflow: hidden; /* Hide overflow in case video goes beyond bounds */
   margin: 0 10px;
 }
@@ -104,5 +119,9 @@ body {
     width: 100%; /* Make videos take full width */
     height: auto; /* Maintain aspect ratio */
     margin: 10px 0; /* Vertical margin between videos */
+  }
+
+  .input-row input{
+    max-width: 140px;
   }
 }
