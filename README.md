@@ -48,7 +48,8 @@ This project is a WebRTC-based application that enables real-time communication 
 
 1. Create/Join a room
 2. Turn on camera for both peers
-3. Start VC 
+3. Start VC
+4. talk
 
 ## Contributing
 
