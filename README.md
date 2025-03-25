@@ -7,6 +7,11 @@ https://webrtc-fvz7.onrender.com/
 
 This project is a WebRTC-based application that enables real-time communication between users through audio, video, and data sharing. It leverages the power of WebRTC to provide a seamless experience for peer-to-peer connections.
 
+## Live Link
+
+- To get a live demo of my project without installation refer to this link https://webrtc-fvz7.onrender.com
+  (May take some time to load for the first time)
+
 ## Features
 
 - Real-time audio and video communication
@@ -51,7 +56,7 @@ This project is a WebRTC-based application that enables real-time communication 
 
 1. Create/Join a room
 2. Turn on camera for both peers
-3. Start VC 
+3. Start VC
 
 ## Contributing
 
